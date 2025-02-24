@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Category from "../app/models/category";
 import Link from "next/link";
 // export const revalidate = 3600;
 

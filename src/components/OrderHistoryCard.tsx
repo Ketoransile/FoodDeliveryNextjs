@@ -1,25 +1,24 @@
-import { useCartStore } from "@/stores/cartStore";
-import { Button } from "../components/ui/button";
+// import { useCartStore } from "@/stores/cartStore";
 import { FaStar } from "react-icons/fa";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
 
 export default function OrderHistoryCard({ item, order }) {
-  const { addToCart, cart } = useCartStore();
-  const { toast } = useToast();
-  const isInCart = cart.some((cartItem) => cartItem._id === item._id);
-  const handleAddToCart = () => {
-    try {
-      toast({
-        title: "Food added to cart Successfully!",
-      });
-      addToCart(item);
-    } catch (error) {
-      console.error("Failed to add to cart", error);
-      toast({
-        title: "Failed to add to Cart",
-      });
-    }
-  };
+  // const { addToCart, cart } = useCartStore();
+  // const { toast } = useToast();
+  // // const isInCart = cart.some((cartItem) => cartItem._id === item._id);
+  // const handleAddToCart = () => {
+  //   try {
+  //     toast({
+  //       title: "Food added to cart Successfully!",
+  //     });
+  //     addToCart(item);
+  //   } catch (error) {
+  //     console.error("Failed to add to cart", error);
+  //     toast({
+  //       title: "Failed to add to Cart",
+  //     });
+  //   }
+  // };
   console.log("item from history card in", item);
   return (
     <div className="flex gap-4 p-4 items-center text-white">

@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "../../../components/ui/button";
 import { useCartStore } from "../../../stores/cartStore";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
@@ -8,15 +7,7 @@ import { useEffect } from "react";
 
 export default function CartPage() {
   const { user } = useUser();
-  const {
-    cart,
-    userId,
-    setUserId,
-    addToCart,
-    removeFromCart,
-    clearCart,
-    decreaseQuantity,
-  } = useCartStore();
+  const { cart, setUserId, addToCart, decreaseQuantity } = useCartStore();
   useEffect(() => {
     if (user) {
       setUserId(user.id);

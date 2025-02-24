@@ -297,8 +297,12 @@ export default async function seedFoods() {
     }
 
     console.log("Foods seeded successfully and assigned to restaurants.");
-  } catch (error: any) {
-    console.error("Error seeding foods:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error seeding foods:", error.message);
+    } else {
+      console.error("Unknown error occurred:", error);
+    }
   }
 }
 seedFoods();

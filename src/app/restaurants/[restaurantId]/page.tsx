@@ -311,9 +311,16 @@ import Restaurant from "../../models/restaurant";
 import { Button } from "@/components/ui/button";
 import { FaStar } from "react-icons/fa";
 import RestaurantDetailsTabs from "@/components/RestaurantDetailsTabs";
-import restaurantType from "../page";
-import Image from "next/image";
 
+interface restaurantType {
+  _id: string;
+  name: string;
+  description?: string;
+  address: string;
+  phone: string;
+  image?: string;
+  foods: [];
+}
 export default async function RestaurantDetailPage({
   params,
 }: {
@@ -322,7 +329,7 @@ export default async function RestaurantDetailPage({
   const { restaurantId } = await params;
   console.log("restaurantId from", restaurantId);
 
-  let restaurant = await Restaurant.findById(restaurantId)
+  const restaurant = await Restaurant.findById(restaurantId)
     .populate({
       path: "foods",
       populate: {
@@ -334,7 +341,7 @@ export default async function RestaurantDetailPage({
   console.log("restaurant from", restaurant);
 
   // Handle missing or empty foods array
-  if (!restaurant || !restaurant.foods || restaurant.foods.length === 0) {
+  if (!restaurant || !restaurant?.foods || restaurant?.foods?.length === 0) {
     return (
       <p className="text-white text-center mt-10">
         No food items found for this restaurant.

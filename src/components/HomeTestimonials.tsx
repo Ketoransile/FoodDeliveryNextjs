@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -8,10 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import HomeRestaurantCard from "./HomeRestaurantCard";
 import HomeTestimonialsCard from "./HomeTestimonialsCard";
 import Image from "next/image";
-import Link from "next/link";
 
 export const customerType = {
   _id: String,

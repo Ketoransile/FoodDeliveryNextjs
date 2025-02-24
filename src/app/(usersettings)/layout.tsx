@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function UserSettingLayout({
@@ -7,7 +6,6 @@ export default function UserSettingLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
   return (
     <section className="flex gap-4">
       {/* <div className="backdrop-blur-lg bg-gradient-to-br from-white/10 to-transparent flex flex-col gap-8 border border-slate-700 rounded-xl p-6 w-[250px]">

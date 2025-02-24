@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { useCartStore } from "./cartStore";
-import { useUser } from "@clerk/nextjs";
 import { createJSONStorage, persist } from "zustand/middleware";
-
+import type { IUser } from "../app/models/user";
 type FormState = {
   address: {
     name: string;
@@ -21,7 +20,7 @@ type FormState = {
   };
   setAddress: (data: Partial<FormState["address"]>) => void;
   setPayment: (data: Partial<FormState["payment"]>) => void;
-  submitForm: (user: any) => Promise<void>;
+  submitForm: (user: IUser) => Promise<void>;
 };
 
 export const useFormStore = create<FormState>()(

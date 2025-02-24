@@ -14,8 +14,13 @@ export default function RestaurantDetailCard({ food }: { food: any }) {
         title: "Food added to cart Successfully!",
       });
       addToCart(food);
-    } catch (error) {
-      console.error("Failed to add to cart", error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Failed to add to cart:", error.message);
+      } else {
+        console.error("An unknown error occurred while adding to cart:", error);
+      }
+
       toast({
         title: "Failed to add to Cart",
       });

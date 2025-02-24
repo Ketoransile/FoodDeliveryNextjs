@@ -1,5 +1,5 @@
 import dbConnect from "../../../lib/dbConnect";
-import Food, { IFood } from "../../models/food";
+import Food from "../../models/food";
 import { NextResponse } from "next/server";
 
 // Get all foods

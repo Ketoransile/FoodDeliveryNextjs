@@ -1,11 +1,29 @@
 "use client";
 import OrderHistoryCard from "@/components/OrderHistoryCard";
 import { useUser } from "@clerk/nextjs";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+interface Food {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  isAvailable: boolean;
+  price: number;
+  category: string; // Assuming category is a string, if it's an object, modify accordingly
+  restaurant: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 
+interface Item {
+  _id: string;
+  food: Food;
+  quantity: number;
+  price: number;
+}
 interface Order {
-  items: any;
+  items: Item[];
   _id: string;
   status: string;
   totalPrice: number;

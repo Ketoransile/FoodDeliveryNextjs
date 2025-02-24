@@ -1,7 +1,4 @@
-import dbConnect from "../lib/dbConnect";
 import mongoose from "mongoose";
-import Category from "../app/models/category";
-import Food from "../app/models/food";
 import HomeFoodCard from "./HomeFoodCard";
 export interface IFood {
   _id: string;

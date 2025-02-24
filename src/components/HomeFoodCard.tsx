@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import Food, { IFood } from "../app/models/food";
+import { IFood } from "../app/models/food";
 import { FaStar } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa6";
 import { Button } from "./ui/button";

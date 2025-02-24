@@ -3,18 +3,8 @@ import Image from "next/image";
 import logo from "./assets/logo.svg";
 import cart from "./assets/cart.svg";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-  UserButton,
-} from "@clerk/nextjs";
 import AuthButtons from "./AuthButtons";
 import ActiveLink from "./ActiveLink";
-import { Suspense } from "react";
 export default function Header() {
   return (
     <div className="justify-between flex items-center backdrop-blur-3xl bg-white/10 border-b border-b-slate-400 pt-4 pb-4 px-20">

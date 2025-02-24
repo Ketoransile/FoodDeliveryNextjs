@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { createJSONStorage } from "zustand/middleware";
-import { useUser } from "@clerk/clerk-react";
 import mongoose from "mongoose";
 
 // IFood interface

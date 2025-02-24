@@ -8,8 +8,14 @@ export async function GET(): Promise<NextResponse> {
     await dbConnect();
     const categories: ICategory[] = await Category.find({});
     return NextResponse.json(categories, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ status: 500, message: error.message });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return NextResponse.json({ status: 500, message: error.message });
+    }
+    return NextResponse.json({
+      status: 500,
+      message: "An unknown error occurred",
+    });
   }
 }
 

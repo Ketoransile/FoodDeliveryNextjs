@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +10,7 @@ import {
 import Restaurants from "@/app/models/restaurant";
 import dbConnect from "@/lib/dbConnect";
 import HomeRestaurantCard from "./HomeRestaurantCard";
-import restaurantType, { restaurantType } from "../app/restaurants/page";
+import { restaurantType } from "../app/restaurants/page";
 import Link from "next/link";
 export default async function HomeRestaurants() {
   await dbConnect();

@@ -1,5 +1,4 @@
-import dbConnect from "@/lib/dbConnect";
-import Restaurants from "../models/restaurant";
+// import Restaurants from "../models/restaurant";
 import HomeRestaurantCard from "@/components/HomeRestaurantCard";
 
 export interface restaurantType {
@@ -23,7 +22,7 @@ export default async function RestaurantsPage() {
     }
     restaurants = await response.json();
     console.log("Restaurants from API", restaurants);
-  } catch (error: Error | any) {
+  } catch (error: Error | unknown) {
     console.error(error);
   }
 

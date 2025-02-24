@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document, model } from "mongoose";
-import Food from "../models/food";
+// import Food from "../models/food";
 export interface IRestaurant extends Document {
   name: string;
   description?: string;

@@ -1,18 +1,9 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { restaurantType } from "@/app/restaurants/page";
 import Category from "../app/models/category";
 import RestaurantDetailCard from "./RestaurantDetailCard";
+import { IFood } from "@/stores/cartStore";
 export default async function RestaurantDetailsTabs({
   restaurant,
 }: {
@@ -32,14 +23,14 @@ export default async function RestaurantDetailsTabs({
           </TabsTrigger>
         ))}
       </TabsList>
-      {restaurant.foods.map((food: any) => (
+      {restaurant.foods.map((food: IFood) => (
         <TabsContent value={`${food.category.name}`} key={food._id}>
           <Card className=" bg-gradient-to-br backdrop-blur-3xl  from-white/30 to-transparent border border-slate-700 ">
             <RestaurantDetailCard key={food._id} food={food} />
           </Card>
         </TabsContent>
       ))}
-      {restaurant.foods.map((food: any) => (
+      {restaurant.foods.map((food: IFood) => (
         <TabsContent value="recommended" key={food._id}>
           <Card
             className=" bg-gradient-to-br backdrop-blur-3xl  from-white/30 to-transparent border border-slate-700 gap-4"
