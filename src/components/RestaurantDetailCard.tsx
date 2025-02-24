@@ -3,8 +3,9 @@ import { FaStar } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { useToast } from "@/hooks/use-toast";
-
-export default function RestaurantDetailCard({ food }: { food: any }) {
+import { IFood } from "@/stores/cartStore";
+import Image from "next/image";
+export default function RestaurantDetailCard({ food }: { food: IFood }) {
   const { addToCart, cart } = useCartStore();
   const { toast } = useToast();
   const isInCart = cart.some((item) => item._id === food._id);
@@ -28,8 +29,11 @@ export default function RestaurantDetailCard({ food }: { food: any }) {
   };
   return (
     <div className="flex gap-4 p-4 items-center text-white">
-      <img
+      <Image
         src={`${food.image}`}
+        alt="food image"
+        width={200}
+        height={200}
         className="h-[200px] w-[200px] rounded-xl object-cover"
       />
       <div className="flex flex-col gap-2">

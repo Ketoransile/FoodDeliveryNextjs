@@ -311,7 +311,8 @@ import Restaurant from "../../models/restaurant";
 import { Button } from "@/components/ui/button";
 import { FaStar } from "react-icons/fa";
 import RestaurantDetailsTabs from "@/components/RestaurantDetailsTabs";
-
+import { IFood } from "@/stores/cartStore";
+import Image from "next/image";
 interface restaurantType {
   _id: string;
   name: string;
@@ -353,7 +354,7 @@ export default async function RestaurantDetailPage({
   const serializableRestaurant: restaurantType = {
     ...restaurant,
     _id: restaurant._id.toString(), // Convert ObjectId to string
-    foods: restaurant.foods.map((food: any) => ({
+    foods: restaurant.foods.map((food: IFood) => ({
       ...food,
       _id: food._id.toString(), // Convert food _id to string
       category: food.category
@@ -377,9 +378,11 @@ export default async function RestaurantDetailPage({
     <div className="flex flex-col gap-8 pt-12">
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-4 gap-4">
-          {serializableRestaurant.foods.map((food: any, index: number) => (
-            <img
+          {serializableRestaurant.foods.map((food: IFood, index: number) => (
+            <Image
               key={food._id}
+              width={200}
+              height={200}
               src={food.image}
               alt={food.name}
               className={`object-cover rounded-xl ${

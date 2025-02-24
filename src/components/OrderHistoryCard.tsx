@@ -1,4 +1,5 @@
 // import { useCartStore } from "@/stores/cartStore";
+import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 // import { useToast } from "@/hooks/use-toast";
 
@@ -22,8 +23,10 @@ export default function OrderHistoryCard({ item, order }) {
   console.log("item from history card in", item);
   return (
     <div className="flex gap-4 p-4 items-center text-white">
-      <img
+      <Image
         src={`${item?.food?.image}`}
+        width={200}
+        height={200}
         className="h-[200px] w-[200px] rounded-xl object-cover"
         alt="food image"
       />

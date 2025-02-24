@@ -12,7 +12,7 @@ export default function Hero() {
           hot and fresh, right to your doorstep! Explore a variety of
           mouthwatering dishes from top restaurants and order in just a few
           clicks. Fast, easy, and satisfying – because great food should never
-          be a hassle." 🚀
+          be a hassle. 🚀
         </p>
         <Link
           href="/restaurants"

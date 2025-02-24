@@ -8,6 +8,7 @@ import { FaClock, FaStar } from "react-icons/fa";
 //   image: string;
 // };
 import { restaurantType } from "../app/restaurants/page";
+import Image from "next/image";
 export default function HomeRestaurantCard({
   restaurant,
 }: {
@@ -20,9 +21,11 @@ export default function HomeRestaurantCard({
       className="flex flex-col gap-2 backdrop-blur-2xl bg-white/10 border border-slate-400 rounded-xl"
     >
       {/* // <div className="flex flex-col gap-2 border border-slate-400 rounded-xl"> */}
-      <img
+      <Image
         src={`${restaurant.image}`}
         alt={restaurant.name}
+        width={200}
+        height={200}
         className="object-cover h-48  rounded-3xl p-2 w-full"
         // width={20}
         // height={20}
