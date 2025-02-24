@@ -3,6 +3,7 @@ import Restaurant from "../../models/restaurant";
 import { Button } from "@/components/ui/button";
 import { FaStar } from "react-icons/fa";
 import RestaurantDetailsTabs from "@/components/RestaurantDetailsTabs";
+import restaurantType from "../page";
 
 export default async function RestaurantDetailPage({
   params,
@@ -12,7 +13,7 @@ export default async function RestaurantDetailPage({
   const { restaurantId } = await params;
   console.log("restaurantId from", restaurantId);
 
-  const restaurant = await Restaurant.findById(restaurantId)
+  let restaurant = await Restaurant.findById(restaurantId)
     .populate({
       path: "foods",
       populate: {
@@ -31,6 +32,15 @@ export default async function RestaurantDetailPage({
       </p>
     );
   }
+  const serializableRestaurant: restaurantType = {
+    ...restaurant,
+    _id: restaurant._id.toString(), // Convert ObjectId to string
+    foods: restaurant.foods.map((food: any) => ({
+      ...food,
+      _id: food._id.toString(), // Convert food _id to string
+    })),
+  };
+  restaurant = serializableRestaurant;
 
   return (
     <div className="flex flex-col gap-8 pt-12">

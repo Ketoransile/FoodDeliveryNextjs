@@ -22,11 +22,11 @@ export default function Header() {
         <Image src={logo} alt="logo" width={30} height={30} />
       </Link>
       <div className="flex gap-10 pr-48">
-        <Input
+        {/* <Input
           type="text"
           placeholder="Search here"
           className="bg-gradient-to-r from-slate-500 to-mainbg text-white placeholder:text-white border-slate-600 max-w-96 rounded-md"
-        />
+        /> */}
         <div className="flex justify-between items-center gap-8">
           {/* <Link href="/">Home</Link>
           <Link href="/restaurants">Restaurants</Link>

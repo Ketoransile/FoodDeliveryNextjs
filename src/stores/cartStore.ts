@@ -1,91 +1,10 @@
-// import { create } from "zustand";
-// import { persist } from "zustand/middleware";
-
-// interface CartItem {
-//   id: string;
-//   name: string;
-//   price: number;
-//   quantity: number;
-//   image?: string;
-//   restaurantId: string;
-// }
-
-// interface CartState {
-//   cart: CartItem[];
-//   addToCart: (item: CartItem) => void;
-//   removeFromCart: (id: string) => void;
-//   clearCart: () => void;
-// }
-
-// export const useCartStore = create<CartState>()(
-//   persist(
-//     (set, get) => ({
-//       cart: [],
-//       addToCart: (item) => {
-//         const existingCart = get().cart;
-//         const existingItem = existingCart.find((i) => i.id === item.id);
-
-//         if (existingItem) {
-//           // Update quantity if item exists
-//           set({
-//             cart: existingCart.map((i) =>
-//               i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-//             ),
-//           });
-//         } else {
-//           // Add new item
-//           set({ cart: [...existingCart, { ...item, quantity: 1 }] });
-//         }
-//       },
-//       removeFromCart: (id) => {
-//         set({ cart: get().cart.filter((item) => item.id !== id) });
-//       },
-//       clearCart: () => set({ cart: [] }),
-//     }),
-//     { name: "cart-storage" } // Key for localStorage
-//   )
-// );
-// import { create } from "zustand";
-
-// interface CartItem {
-//   id: string;
-//   name: string;
-//   price: number;
-//   quantity: number;
-// }
-// interface CartState {
-//   cart: CartItem[];
-//   addToCart: (item: CartItem) => void;
-//   removeFromCart: (id: string) => void;
-//   clearCart: () => void;
-// }
-
-// export const useCartStore = create<CartState>((set) => ({
-//   cart: [],
-//   addToCart: (item) =>
-//     set((state) => {
-//       const existingItem = state.cart.find((i) => i.id === item.id);
-//       if (existingItem) {
-//         return {
-//           cart: state.cart.map((i) =>
-//             i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-//           ),
-//         };
-//       }
-//       return { cart: [...state.cart, { ...item, quantity: 1 }] };
-//     }),
-
-//   removeFromCart: (id) =>
-//     set((state) => ({
-//       cart: state.cart.filter((item) => item.id !== id),
-//     })),
-
-//   clearCart: () => set({ cart: [] }),
-// }));
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { createJSONStorage } from "zustand/middleware";
+import { useUser } from "@clerk/clerk-react";
 import mongoose from "mongoose";
 
-// IFood interface (for reference)
+// IFood interface
 export interface IFood {
   _id: string;
   name: string;
@@ -104,44 +23,73 @@ interface CartItem extends Omit<IFood, "category" | "restaurant"> {
   restaurant: string; // Store as string instead of ObjectId
 }
 
-// Zustand Cart Store
+// Zustand Cart Store with Persist
 interface CartState {
+  userId: string | null; // Add userId to the store
   cart: CartItem[];
+  setUserId: (userId: string) => void; // Method to set userId
   addToCart: (item: IFood) => void;
+  decreaseQuantity: (id: string) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
 }
 
-export const useCartStore = create<CartState>((set) => ({
-  cart: [],
+export const useCartStore = create<CartState>()(
+  persist(
+    (set, get) => ({
+      userId: null, // Initialize userId as null
+      cart: [],
 
-  addToCart: (item) =>
-    set((state) => {
-      const existingItem = state.cart.find((i) => i._id === item._id);
-      if (existingItem) {
-        return {
-          cart: state.cart.map((i) =>
-            i._id === item._id ? { ...i, quantity: i.quantity + 1 } : i
-          ),
-        };
-      }
-      return {
-        cart: [
-          ...state.cart,
-          {
-            ...item,
-            quantity: 1,
-            category: item.category.toString(),
-            restaurant: item.restaurant.toString(),
-          },
-        ],
-      };
+      // Method to set userId
+      setUserId: (userId) => set({ userId }),
+
+      addToCart: (item) => {
+        const { cart } = get();
+        // const { userId, cart } = get();
+        // if (!userId) {
+        // console.error("You must be logged in to add items to the cart.");
+        // return;
+        // }
+
+        const existingItem = cart.find((i) => i._id === item._id);
+        if (existingItem) {
+          set({
+            cart: cart.map((i) =>
+              i._id === item._id ? { ...i, quantity: i.quantity + 1 } : i
+            ),
+          });
+        } else {
+          set({
+            cart: [
+              ...cart,
+              {
+                ...item,
+                quantity: 1,
+                category: item.category.toString(),
+                restaurant: item.restaurant.toString(),
+              },
+            ],
+          });
+        }
+      },
+      decreaseQuantity: (id) => {
+        const { cart } = get();
+        const updatedCart = cart
+          .map((item) =>
+            item._id === id ? { ...item, quantity: item.quantity - 1 } : item
+          )
+          .filter((item) => item.quantity > 0); // Remove if quantity reaches 0
+
+        set({ cart: updatedCart });
+      },
+      removeFromCart: (id) =>
+        set({ cart: get().cart.filter((item) => item._id !== id) }),
+
+      clearCart: () => set({ cart: [] }),
     }),
-
-  removeFromCart: (id) =>
-    set((state) => ({
-      cart: state.cart.filter((item) => item._id !== id),
-    })),
-
-  clearCart: () => set({ cart: [] }),
-}));
+    {
+      name: "cart-storage", // Key for localStorage
+      storage: createJSONStorage(() => localStorage), // Store in localStorage
+    }
+  )
+);

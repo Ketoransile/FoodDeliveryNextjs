@@ -1,19 +1,18 @@
-"use client";
-import { FaStar } from "react-icons/fa";
-import { Button } from "./ui/button";
 import { useCartStore } from "@/stores/cartStore";
+import { Button } from "../components/ui/button";
+import { FaStar } from "react-icons/fa";
 import { useToast } from "@/hooks/use-toast";
 
-export default function RestaurantDetailCard({ food }: { food: any }) {
+export default function OrderHistoryCard({ item, order }) {
   const { addToCart, cart } = useCartStore();
   const { toast } = useToast();
-  const isInCart = cart.some((item) => item._id === food._id);
+  const isInCart = cart.some((cartItem) => cartItem._id === item._id);
   const handleAddToCart = () => {
     try {
       toast({
         title: "Food added to cart Successfully!",
       });
-      addToCart(food);
+      addToCart(item);
     } catch (error) {
       console.error("Failed to add to cart", error);
       toast({
@@ -21,14 +20,19 @@ export default function RestaurantDetailCard({ food }: { food: any }) {
       });
     }
   };
+  console.log("item from history card in", item);
   return (
     <div className="flex gap-4 p-4 items-center text-white">
       <img
-        src={`${food.image}`}
+        src={`${item?.food?.image}`}
         className="h-[200px] w-[200px] rounded-xl object-cover"
+        alt="food image"
       />
-      <div className="flex flex-col gap-2">
-        <h1>{food.name}</h1>
+      <div className="flex flex-col gap-2 rounded-xl">
+        {/* <p className="text-slate-300 text-xs">{item?.food?.description}</p> */}
+        {/* <p className="text-xs">#{item._id}</p>{" "} */}
+        <p className="text-xs">{new Date(order.createdAt).toLocaleString()} </p>
+        <h1>{item?.food?.name}</h1>
         <div className="flex gap-2">
           <FaStar />
           <FaStar />
@@ -36,17 +40,19 @@ export default function RestaurantDetailCard({ food }: { food: any }) {
           <FaStar />
           <FaStar />
         </div>
-        <h1 className="text-buttonbg">${food.price}</h1>
-        <p className="text-slate-300 text-xs">{food.description}</p>
-        <div className="w-fit">
+        <h1 className="text-lg ">Quantity {item?.quantity}</h1>
+        <h1 className="text-buttonbg font-bold text-2xl">
+          ${item?.food?.price}
+        </h1>
+        {/* <div className="">
           <Button
             className={`bg-buttonbg min-w-full rounded-xl disabled:bg-black w-fit`}
             onClick={handleAddToCart}
             disabled={isInCart}
           >
-            Add To Cart
+            Reorder
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

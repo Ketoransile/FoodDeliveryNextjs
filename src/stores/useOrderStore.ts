@@ -1,70 +1,30 @@
 import { create } from "zustand";
 
-// Define types for Order
-interface OrderItem {
-  food: string; // Reference to Food _id
-  quantity: number;
-}
+export const useOrderStore = create((set) => ({
+  address: null,
+  payment: null,
+  setAddress: (data) => set({ address: data }),
+  setPayment: (data) => set({ payment: data }),
+  submitOrder: async () => {
+    const { address, payment } = useOrderStore.getState();
+    if (address && payment) {
+      const order = { ...address, ...payment };
 
-interface Order {
-  _id: string;
-  user: string; // Reference to User _id
-  items: OrderItem[];
-  totalPrice: number;
-  status: "pending" | "preparing" | "delivered" | "canceled";
-  createdAt: Date;
-  updatedAt: Date;
-}
+      try {
+        const response = await fetch("/api/order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(order),
+        });
 
-interface OrderStoreState {
-  orders: Order[];
-  loading: boolean;
-  error: string | null;
-  fetchOrders: () => Promise<void>;
-  createOrder: (
-    order: Omit<Order, "_id" | "createdAt" | "updatedAt">
-  ) => Promise<void>;
-}
-
-// Create the store
-const useOrderStore = create<OrderStoreState>((set) => ({
-  orders: [],
-  loading: false,
-  error: null,
-
-  // Fetch orders
-  fetchOrders: async () => {
-    set({ loading: true, error: null });
-    try {
-      const res = await fetch("/api/orders");
-      const data: Order[] = await res.json();
-      set({ orders: data, loading: false });
-    } catch (error) {
-      set({
-        error: error instanceof Error ? error.message : "An error occurred",
-        loading: false,
-      });
-    }
-  },
-
-  // Create a new order
-  createOrder: async (order) => {
-    set({ loading: true, error: null });
-    try {
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(order),
-      });
-      const data: Order = await res.json();
-      set((state) => ({ orders: [...state.orders, data], loading: false }));
-    } catch (error) {
-      set({
-        error: error instanceof Error ? error.message : "An error occurred",
-        loading: false,
-      });
+        if (response.ok) {
+          console.log("Order submitted successfully");
+        } else {
+          console.error("Order submission failed");
+        }
+      } catch (error) {
+        console.error("Error submitting order:", error);
+      }
     }
   },
 }));
-
-export default useOrderStore;

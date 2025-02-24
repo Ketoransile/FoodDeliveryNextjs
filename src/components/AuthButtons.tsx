@@ -8,7 +8,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-
+import { AiFillProfile } from "react-icons/ai";
 export default function AuthButtons() {
   return (
     <>
@@ -18,7 +18,15 @@ export default function AuthButtons() {
         </SignInButton>
       </SignedOut>
       <SignedIn>
-        <UserButton />
+        <UserButton>
+          <UserButton.MenuItems>
+            <UserButton.Link
+              label="Order History"
+              labelIcon={<AiFillProfile />}
+              href="/order-history"
+            />
+          </UserButton.MenuItems>
+        </UserButton>
       </SignedIn>
     </>
   );

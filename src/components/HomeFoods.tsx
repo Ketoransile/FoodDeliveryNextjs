@@ -28,7 +28,7 @@ async function getFoods(): Promise<IFood[]> {
       throw new Error("Error while fetching foods");
     }
     console.log(response);
-    foods = response.json();
+    foods = await response.json();
     console.log("foods from homefoods are", foods);
   } catch (error) {
     console.error(error);

@@ -8,11 +8,12 @@ export default function Hero() {
         <h1 className="font-bold text-6xl ">
           GET DELICIOUS FOOD AT YOUR DOORSTEPS{" "}
         </h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-          cupiditate, ducimus illum, odio numquam, praesentium a cum libero unde
-          ea consequuntur fuga deserunt. Quidem porro amet officia, officiis eos
-          excepturi.
+        <p className="text-slate-400">
+          Craving something delicious? 🍔🍕🥗 Get your favorite meals delivered
+          hot and fresh, right to your doorstep! Explore a variety of
+          mouthwatering dishes from top restaurants and order in just a few
+          clicks. Fast, easy, and satisfying – because great food should never
+          be a hassle!" 🚀
         </p>
         <Link
           href="/restaurants"
