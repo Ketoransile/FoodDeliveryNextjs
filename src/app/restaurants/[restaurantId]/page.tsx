@@ -312,13 +312,14 @@ import { Button } from "@/components/ui/button";
 import { FaStar } from "react-icons/fa";
 import RestaurantDetailsTabs from "@/components/RestaurantDetailsTabs";
 import restaurantType from "../page";
+import Image from "next/image";
 
 export default async function RestaurantDetailPage({
   params,
 }: {
   params: { restaurantId: string };
 }) {
-  const { restaurantId } = params;
+  const { restaurantId } = await params;
   console.log("restaurantId from", restaurantId);
 
   let restaurant = await Restaurant.findById(restaurantId)
