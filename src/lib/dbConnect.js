@@ -177,8 +177,8 @@ async function dbConnect() {
       .connect(MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        serverSelectionTimeoutMS: 30000, // 30s timeout
-        socketTimeoutMS: 45000, // 45s socket timeout
+        serverSelectionTimeoutMS: 30000, // 30 seconds to prevent timeouts
+        socketTimeoutMS: 60000, // 45s socket timeout
       })
       .then((mongoose) => {
         console.log("Database connected successfully");

@@ -1,5 +1,6 @@
 // import Restaurants from "../models/restaurant";
-import HomeRestaurantCard from "@/components/HomeRestaurantCard";
+import dbConnect from "@/lib/dbConnect";
+import HomeRestaurantCard from "../../components/HomeRestaurantCard";
 import Restaurant from "../models/restaurant";
 import mongoose from "mongoose";
 export interface restaurantType {
@@ -26,8 +27,9 @@ export type RawRestaurant = {
 async function getRestaurants(): Promise<restaurantType[]> {
   let restaurants: restaurantType[] = [];
   try {
+    await dbConnect();
     // Fetch all restaurants from the database
-    const rawRestaurants = (await Restaurant.find({})
+    const rawRestaurants = (await Restaurant.find()
       .lean()
       .exec()) as RawRestaurant[]; // `.lean()` returns plain JavaScript objects
 
