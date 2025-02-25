@@ -13,7 +13,7 @@ export interface restaurantType {
 export default async function RestaurantsPage() {
   let restaurants: restaurantType[] = [];
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    const apiUrl = process.env.PUBLIC_API_URL || "http://localhost:3000";
     const response = await fetch(`${apiUrl}/api/restaurants`, {
       next: { revalidate: 60 },
     });
