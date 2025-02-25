@@ -50,6 +50,73 @@
 // };
 
 // export default dbConnect;
+// import mongoose from "mongoose";
+// export const runtime = "nodejs";
+
+// interface DatabaseConnections {
+//   FoodDb: mongoose.Connection;
+// }
+
+// let cached: {
+//   conn: DatabaseConnections | null;
+//   promise: Promise<DatabaseConnections> | null;
+// } = global.mongoose;
+
+// if (!cached) {
+//   cached = global.mongoose = { conn: null, promise: null };
+// }
+
+// const dbConnect = async () => {
+//   const Mongo_URI = process.env.MONGODB_URI;
+
+//   if (!Mongo_URI) {
+//     throw new Error("MongoDB URIs not found in environment variables");
+//   }
+
+//   if (cached.conn) {
+//     return cached.conn;
+//   }
+
+//   if (!cached.promise) {
+//     const opts = {
+//       bufferCommands: true,
+//       minPoolSize: 2,
+//       maxPoolSize: 4,
+//       serverSelectionTimeoutMS: 15000,
+//       socketTimeoutMS: 45000,
+//       connectTimeoutMS: 10000,
+//       maxIdleTimeMS: 270000,
+//       retryWrites: true,
+//       retryReads: true,
+//     };
+
+//     cached.promise = (async () => {
+//       try {
+//         const FoodDb = await mongoose.createConnection(Mongo_URI, opts);
+
+//         FoodDb.on("error", (error) => {
+//           console.error("MVP DB connection error:", error);
+//           cached.conn = null;
+//           cached.promise = null;
+//         });
+
+//         return { FoodDb };
+//       } catch (error) {
+//         cached.promise = null;
+//         throw error;
+//       }
+//     })();
+//   }
+
+//   try {
+//     cached.conn = await cached.promise;
+//     return cached.conn;
+//   } catch (error) {
+//     cached.promise = null;
+//     throw error;
+//   }
+// };
+// export default dbConnect;
 import mongoose from "mongoose";
 export const runtime = "nodejs";
 
@@ -57,14 +124,18 @@ interface DatabaseConnections {
   FoodDb: mongoose.Connection;
 }
 
-let cached: {
-  conn: DatabaseConnections | null;
-  promise: Promise<DatabaseConnections> | null;
-} = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+// Extend globalThis to include mongoose
+declare global {
+  var mongoose:
+    | {
+        conn: DatabaseConnections | null;
+        promise: Promise<DatabaseConnections> | null;
+      }
+    | undefined;
 }
+
+let cached =
+  global.mongoose || (global.mongoose = { conn: null, promise: null });
 
 const dbConnect = async () => {
   const Mongo_URI = process.env.MONGODB_URI;
@@ -116,4 +187,5 @@ const dbConnect = async () => {
     throw error;
   }
 };
+
 export default dbConnect;
