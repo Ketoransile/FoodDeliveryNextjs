@@ -1,3 +1,4 @@
+import dbConnect from "@/lib/dbConnect";
 import Category from "../app/models/category";
 import Image from "next/image";
 import Link from "next/link";
@@ -61,6 +62,7 @@ type RawCategory = {
 async function getCategories(): Promise<CategoryType[]> {
   let categories: CategoryType[] = [];
   try {
+    await dbConnect();
     const rawCategories = (await Category.find()
       .lean()
       .exec()) as RawCategory[];

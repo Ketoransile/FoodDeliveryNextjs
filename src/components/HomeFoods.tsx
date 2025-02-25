@@ -2,6 +2,7 @@ import HomeFoodCard from "./HomeFoodCard";
 import { IFood } from "../stores/cartStore";
 import Food from "../app/models/food";
 import mongoose from "mongoose";
+import dbConnect from "@/lib/dbConnect";
 // export interface IFood {
 //   _id: string;
 //   name: string;
@@ -31,6 +32,7 @@ type RawFood = {
 async function getFoods(): Promise<IFood[]> {
   let foods: IFood[] = [];
   try {
+    await dbConnect();
     const rawFoods = (await Food.find().lean().exec()) as RawFood[];
     foods = rawFoods.map((food: RawFood) => ({
       _id: food._id.toString(), // Convert _id to string
