@@ -8,13 +8,26 @@ import {
 } from "@/components/ui/carousel";
 
 import Restaurants from "@/app/models/restaurant";
-import dbConnect from "@/lib/dbConnect";
+// import dbConnect from "@/lib/dbConnect";
 import HomeRestaurantCard from "./HomeRestaurantCard";
 import { restaurantType } from "../app/restaurants/page";
 import Link from "next/link";
 export default async function HomeRestaurants() {
-  await dbConnect();
-  const restaurants: restaurantType[] = await Restaurants.find({}).lean();
+  // await dbConnect();
+  // const restaurants: restaurantType[] = await Restaurants.find(
+  //   {}
+  // ).lean<restaurantType>();
+  const apiUrl = process.env.PUBLIC_API_URL || "http://localhost:3000";
+  const response = await fetch(`${apiUrl}/api/restaurants`, {
+    next: { revalidate: 60 },
+  });
+  if (!response.ok) {
+    throw new Error("Error while fetching categories");
+  }
+  // categories = response.json();
+  const restaurants: restaurantType[] = await response.json();
+  console.log("restaurajt resposne", restaurants);
+
   console.log("Restaurants from db", Restaurants);
   return (
     <div className="flex flex-col gap-8 pb-48">

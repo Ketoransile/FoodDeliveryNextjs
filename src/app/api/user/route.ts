@@ -1,6 +1,6 @@
 import dbConnect from "../../../lib/dbConnect";
 import User from "../../models/user";
-import { WebhookEvent } from "@clerk/nextjs";
+import { WebhookEvent } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request): Promise<NextResponse> {

@@ -4,7 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-
+// import { IFood } from "../../../stores/cartStore";
 export default function CartPage() {
   const { user } = useUser();
   const { cart, setUserId, addToCart, decreaseQuantity } = useCartStore();
@@ -29,7 +29,7 @@ export default function CartPage() {
           <div key={food._id} className="flex justify-between items-center ">
             <div className="flex gap-8 justify-center items-center">
               <Image
-                src={food.image}
+                src={food.image || "/burger.svg"}
                 alt={food.name}
                 width={200}
                 height={200}

@@ -2,18 +2,17 @@
 import { FaStar } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/stores/cartStore";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+
 import { IFood } from "@/stores/cartStore";
 import Image from "next/image";
 export default function RestaurantDetailCard({ food }: { food: IFood }) {
   const { addToCart, cart } = useCartStore();
-  const { toast } = useToast();
+
   const isInCart = cart.some((item) => item._id === food._id);
   const handleAddToCart = () => {
     try {
-      toast({
-        title: "Food added to cart Successfully!",
-      });
+      toast("Food added to cart Successfully!");
       addToCart(food);
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -22,9 +21,7 @@ export default function RestaurantDetailCard({ food }: { food: IFood }) {
         console.error("An unknown error occurred while adding to cart:", error);
       }
 
-      toast({
-        title: "Failed to add to Cart",
-      });
+      toast("Failed to add to Cart");
     }
   };
   return (

@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
 import HomeFoodCard from "./HomeFoodCard";
-export interface IFood {
-  _id: string;
-  name: string;
-  description?: string;
-  price: number;
-  image?: string;
-  category: mongoose.Schema.Types.ObjectId;
-  restaurant: mongoose.Schema.Types.ObjectId;
-  isAvailable: boolean;
-}
+import { IFood } from "@/stores/cartStore";
+// export interface IFood {
+//   _id: string;
+//   name: string;
+//   description?: string;
+//   price: number;
+//   image?: string;
+//   category: mongoose.Schema.Types.ObjectId;
+//   restaurant: mongoose.Schema.Types.ObjectId;
+//   isAvailable: boolean;
+// }
 async function getFoods(): Promise<IFood[]> {
   let foods: IFood[] = [];
   try {

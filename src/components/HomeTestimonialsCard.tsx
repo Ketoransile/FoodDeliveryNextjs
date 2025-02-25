@@ -1,6 +1,10 @@
 import Image from "next/image";
-
-export default function HomeTestimonialsCard({ customer }) {
+import { customerType } from "./HomeTestimonials";
+export default function HomeTestimonialsCard({
+  customer,
+}: {
+  customer: customerType;
+}) {
   const { name, review, image } = customer;
   return (
     <div className="flex flex-col p-8 gap-10 max-h-80 min-h-80   text-white backdrop-blur-3xl bg-white/10 rounded-lg border border-slate-600">

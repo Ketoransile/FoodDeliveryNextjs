@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 export interface IFood {
   _id: string;
   name: string;
-  description?: string;
+  description: string;
   price: number;
   image?: string;
   category: mongoose.Schema.Types.ObjectId;
@@ -18,8 +18,8 @@ export interface IFood {
 // Updated CartItem interface
 interface CartItem extends Omit<IFood, "category" | "restaurant"> {
   quantity: number;
-  category: string; // Store as string instead of ObjectId
-  restaurant: string; // Store as string instead of ObjectId
+  category: mongoose.Schema.Types.ObjectId; // Store as string instead of ObjectId
+  restaurant: mongoose.Schema.Types.ObjectId; // Store as string instead of ObjectId
 }
 
 // Zustand Cart Store with Persist
@@ -64,8 +64,8 @@ export const useCartStore = create<CartState>()(
               {
                 ...item,
                 quantity: 1,
-                category: item.category.toString(),
-                restaurant: item.restaurant.toString(),
+                category: item.category,
+                restaurant: item.restaurant,
               },
             ],
           });

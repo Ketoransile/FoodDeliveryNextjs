@@ -2,8 +2,15 @@
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 // import { useToast } from "@/hooks/use-toast";
-
-export default function OrderHistoryCard({ item, order }) {
+import { Item } from "../app/(usersettings)/order-history/page";
+import { Order } from "../app/(usersettings)/order-history/page";
+export default function OrderHistoryCard({
+  item,
+  order,
+}: {
+  item: Item;
+  order: Order;
+}) {
   // const { addToCart, cart } = useCartStore();
   // const { toast } = useToast();
   // // const isInCart = cart.some((cartItem) => cartItem._id === item._id);

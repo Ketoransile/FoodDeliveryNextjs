@@ -36,11 +36,11 @@ export default function HomeRestaurantCard({
           {restaurant.name}
         </h1>
         <p className="text-xs text-white">{restaurant.description}</p>
-        <div className="flex justify-between items-center ">
+        {/* <div className="flex justify-between items-center ">
           <p className="text-xs text-white font-semibold">
             ${restaurant.price}
           </p>
-        </div>
+        </div> */}
         <div className="flex justify-between pt-2">
           <div className="flex text-xs gap-1 text-white">
             <FaStar />

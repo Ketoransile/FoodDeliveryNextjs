@@ -2,6 +2,12 @@
 import { NextResponse } from "next/server";
 import Order from "../../models/order";
 import mongoose from "mongoose";
+interface Item {
+  _id?: string; // Optional, if present in the database
+  food: string; // Food should be a string (ID)
+  quantity: number;
+  price: number;
+}
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +22,8 @@ export async function POST(request: Request) {
     // : throw new Error('Invalid user ID format');
 
     // 🛠 Validate that each item has a `food` field
-    if (!data.items.every((item) => item.food)) {
+    console.log("data.items", data.items);
+    if (!data.items.every((item: Item) => item.food)) {
       throw new Error("Each item must include a food ID.");
     }
 

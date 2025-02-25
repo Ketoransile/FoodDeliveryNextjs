@@ -78,7 +78,7 @@ export default async function HomeCategories() {
                 prefetch={true}
               >
                 <Image
-                  src={category.icon}
+                  src={category.icon || "/burger.svg"}
                   alt="icon-image"
                   width={48}
                   height={48}

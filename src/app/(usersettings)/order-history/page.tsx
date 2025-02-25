@@ -16,18 +16,21 @@ interface Food {
   __v: number;
 }
 
-interface Item {
+export interface Item {
   _id: string;
   food: Food;
   quantity: number;
   price: number;
 }
-interface Order {
-  items: Item[];
+export interface Order {
   _id: string;
-  status: string;
+  user: string; // User ID
+  items: Item[];
+  status: "pending" | "preparing" | "delivered" | "cancelled";
   totalPrice: number;
-  // Add other fields as needed
+  createdAt: string; // ISO Date String
+  updatedAt: string; // ISO Date String
+  __v: number;
 }
 
 export default function OrderHistory() {

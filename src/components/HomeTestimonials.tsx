@@ -11,13 +11,13 @@ import {
 import HomeTestimonialsCard from "./HomeTestimonialsCard";
 import Image from "next/image";
 
-export const customerType = {
-  _id: String,
-  name: String,
-  review: String,
-  image: String,
-};
-export const customersReviews = [
+export interface customerType {
+  _id: string;
+  name: string;
+  review: string;
+  image: string;
+}
+export const customersReviews: customerType[] = [
   {
     _id: "1",
     name: "Doe",
