@@ -61,7 +61,7 @@ type RawCategory = {
 async function getCategories(): Promise<CategoryType[]> {
   let categories: CategoryType[] = [];
   try {
-    const rawCategories = (await Category.find({})
+    const rawCategories = (await Category.find()
       .lean()
       .exec()) as RawCategory[];
     categories = rawCategories.map((category: RawCategory) => ({

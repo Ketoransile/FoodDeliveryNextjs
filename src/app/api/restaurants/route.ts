@@ -5,9 +5,7 @@ import { NextResponse } from "next/server";
 // Get all restaurants
 export async function GET(): Promise<NextResponse> {
   await dbConnect();
-  const restaurants: IRestaurant[] = await Restaurant.find({}).populate(
-    "foods"
-  );
+  const restaurants: IRestaurant[] = await Restaurant.find().populate("foods");
   return NextResponse.json(restaurants, { status: 200 });
 }
 

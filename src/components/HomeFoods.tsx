@@ -31,7 +31,7 @@ type RawFood = {
 async function getFoods(): Promise<IFood[]> {
   let foods: IFood[] = [];
   try {
-    const rawFoods = (await Food.find({}).lean().exec()) as RawFood[];
+    const rawFoods = (await Food.find().lean().exec()) as RawFood[];
     foods = rawFoods.map((food: RawFood) => ({
       _id: food._id.toString(), // Convert _id to string
       name: food.name,
