@@ -186,12 +186,12 @@ export default async function Category({
     restaurant: food.restaurant, // Convert restaurant ObjectId to string
     isAvailable: food.isAvailable ?? true,
   }));
-  console.log("serializedFoods from", foods);
+  console.log("serializedFoods from", serializedFoods);
 
   return (
     <div className="flex flex-col gap-8 pt-12">
       <h1 className="font-bold text-2xl text-white">
-        {/* {foods[0]?.category?.name || ""} */}
+        {/* {serializedFoods[0]?.category?.name || ""} */}
       </h1>
       <div className="grid grid-cols-4 gap-8">
         {serializedFoods.map((food) => (

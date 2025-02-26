@@ -16,7 +16,7 @@ import dbConnect from "@/lib/dbConnect";
 // import { Document } from "mongoose";
 
 // Define the Mongoose document type
-type RawFood = {
+export type RawFood = {
   _id: string; // _id will be a string after .toString()
   name: string;
   description: string;
