@@ -7,6 +7,7 @@ import Image from "next/image";
 import mongoose from "mongoose";
 import { IFood } from "@/stores/cartStore";
 import { RawFood } from "@/components/HomeFoods";
+import dbConnect from "@/lib/dbConnect";
 
 export interface RestaurantType {
   _id: string;
@@ -32,7 +33,7 @@ export default async function RestaurantDetailPage({
 }) {
   const { restaurantId } = await params;
   console.log("restaurantId from", restaurantId);
-
+  await dbConnect();
   const restaurant = (await Restaurant.findById(restaurantId)
     .populate({
       path: "foods",
