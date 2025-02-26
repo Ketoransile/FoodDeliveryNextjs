@@ -17,7 +17,7 @@ import dbConnect from "@/lib/dbConnect";
 
 // Define the Mongoose document type
 export type RawFood = {
-  _id: string; // _id will be a string after .toString()
+  _id: mongoose.Types.ObjectId; // _id will be a string after .toString()
   name: string;
   description: string;
   price: number;
@@ -40,8 +40,8 @@ async function getFoods(): Promise<IFood[]> {
       description: food.description,
       price: food.price,
       image: food.image, // Optional field, can be undefined
-      category: food.category, // This will be an ObjectId (MongoDB reference)
-      restaurant: food.restaurant, // This will be an ObjectId (MongoDB reference)
+      category: food.category.toString(), // This will be an ObjectId (MongoDB reference)
+      restaurant: food.restaurant.toString(), // This will be an ObjectId (MongoDB reference)
       isAvailable: food.isAvailable,
     }));
     // foods = foods as IFood[];

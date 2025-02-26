@@ -4,14 +4,17 @@ import { Button } from "@/components/ui/button";
 import { FaStar } from "react-icons/fa";
 import RestaurantDetailsTabs from "@/components/RestaurantDetailsTabs";
 import Image from "next/image";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 import { IFood } from "@/stores/cartStore";
 import { RawFood } from "@/components/HomeFoods";
 import dbConnect from "@/lib/dbConnect";
+import mongoose from "mongoose";
 
 export interface RestaurantType {
   _id: string;
   name: string;
+  createdAt: string;
+  updatedAt: string;
   foods: IFood[];
 }
 export interface RawRestaurant {
@@ -54,10 +57,12 @@ export default async function RestaurantDetailPage({
       description: food.description,
       price: food.price,
       image: food.image || "/burger.svg",
-      category: food.category,
-      restaurant: food.restaurant,
+      category: food.category.toString(),
+      restaurant: food.restaurant.toString(),
       isAvailable: food.isAvailable,
     })),
+    createdAt: restaurant.createdAt.toISOString(), // Convert Date to string
+    updatedAt: restaurant.updatedAt.toISOString(), // Convert Date to string
   };
   // Handle missing or empty foods array
   if (

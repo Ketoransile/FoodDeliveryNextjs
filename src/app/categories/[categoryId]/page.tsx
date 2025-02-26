@@ -110,6 +110,7 @@ import dbConnect from "@/lib/dbConnect";
 import Food from "../../../app/models/food";
 import HomeFoodCard from "../../../components/HomeFoodCard";
 import { IFood } from "../../../stores/cartStore";
+import { RawFood } from "@/components/HomeFoods";
 // export interface IFood {
 //   _id: string;
 //   name: string;
@@ -153,10 +154,11 @@ export default async function Category({
   const { categoryId } = await params;
   await dbConnect();
   // Fetch foods and populate the category field
-  const foods = await Food.find({ category: categoryId })
+  const foods = (await Food.find({ category: categoryId })
     .populate("category")
     .populate("restaurant")
-    .lean<IFood[]>(); // Explicitly defining the type
+    .lean()
+    .exec()) as RawFood[]; // Explicitly defining the type
 
   console.log("foods from", foods);
 
@@ -183,8 +185,8 @@ export default async function Category({
     description: food.description || "",
     price: food.price || 0,
     image: food.image || "/burger.svg",
-    category: food.category,
-    restaurant: food.restaurant, // Convert restaurant ObjectId to string
+    category: food.category.toString(),
+    restaurant: food.restaurant.toString(), // Convert restaurant ObjectId to string
     isAvailable: food.isAvailable ?? true,
   }));
   console.log("serializedFoods from", serializedFoods);

@@ -7,7 +7,10 @@ import { Input } from "./ui/input";
 
 export default function Footer() {
   return (
-    <div className="grid grid-cols-4  px-20 pt-20 pb-12 mt-32 backdrop-blur-lg bg-white/10 text-slate-300">
+    <div
+      className="grid grid-cols-4  px-20 pt-20 pb-12 mt-32 backdrop-blur-lg bg-white/10 text-slate-300"
+      id="footer"
+    >
       <div className="flex flex-col gap-8">
         <div className="flex gap-4">
           <Link href="#">

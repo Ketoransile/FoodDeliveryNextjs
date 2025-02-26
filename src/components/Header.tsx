@@ -23,7 +23,7 @@ export default function Header() {
           <Link href="#">About </Link> */}
           <ActiveLink href="/">Home</ActiveLink>
           <ActiveLink href="/restaurants">Restaurants</ActiveLink>
-          <ActiveLink href="#">About</ActiveLink>
+          <ActiveLink href="#footer">About</ActiveLink>
         </div>
       </div>
       <div className="flex gap-8">

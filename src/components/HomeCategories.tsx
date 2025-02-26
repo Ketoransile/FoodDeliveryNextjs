@@ -2,6 +2,7 @@ import dbConnect from "@/lib/dbConnect";
 import Category from "../app/models/category";
 import Image from "next/image";
 import Link from "next/link";
+import mongoose from "mongoose";
 // export const revalidate = 3600;
 
 const iconMapping: Record<string, string> = {
@@ -22,7 +23,7 @@ interface CategoryType {
   icon?: string;
 }
 type RawCategory = {
-  _id: string; // _id will be a string after .toString()
+  _id: mongoose.Types.ObjectId; // _id will be a string after .toString()
   name: string;
   description: string;
   createdAt: string | Date;
@@ -30,35 +31,6 @@ type RawCategory = {
   __v: number;
 };
 
-// async function getCategories(): Promise<CategoryType[]> {
-//   // let categories: CategoryType[] = [];
-//   try {
-//     // const response = await Category.find({}).lean();
-//     // console.log("Response from database is ", response);
-//     // if (!response) {
-//     //   throw new Error(`Failed to fetch categories:`);
-//     // }
-//     const apiUrl = process.env.PUBLIC_API_URL || "http://localhost:3000";
-//     const response = await fetch(`${apiUrl}/api/categories`, {
-//       next: { revalidate: 60 },
-//     });
-//     if (!response.ok) {
-//       throw new Error("Error while fetching categories");
-//     }
-//     // categories = response.json();
-//     const categoriesFromApi: CategoryType[] = await response.json();
-//     console.log("Categoies resposne", categoriesFromApi);
-
-//     return categoriesFromApi.map((category) => ({
-//       ...category,
-//       icon:
-//         iconMapping[category.name.toLowerCase()] || "/icons/defaultIcon.svg",
-//     }));
-//   } catch (error) {
-//     console.error("Error fetching categories:", error);
-//     return [];
-//   }
-// }
 async function getCategories(): Promise<CategoryType[]> {
   let categories: CategoryType[] = [];
   try {

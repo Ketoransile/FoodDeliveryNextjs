@@ -10,16 +10,16 @@ export interface IFood {
   description: string;
   price: number;
   image?: string;
-  category: mongoose.Schema.Types.ObjectId;
-  restaurant: mongoose.Schema.Types.ObjectId;
+  category: mongoose.Schema.Types.ObjectId | string;
+  restaurant: mongoose.Schema.Types.ObjectId | string;
   isAvailable: boolean;
 }
 
 // Updated CartItem interface
 interface CartItem extends Omit<IFood, "category" | "restaurant"> {
   quantity: number;
-  category: mongoose.Schema.Types.ObjectId; // Store as string instead of ObjectId
-  restaurant: mongoose.Schema.Types.ObjectId; // Store as string instead of ObjectId
+  category: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
+  restaurant: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
 }
 
 // Zustand Cart Store with Persist
