@@ -34,18 +34,34 @@ export default async function RestaurantDetailPage({
 }: {
   params: Promise<{ restaurantId: string }>; // Explicitly typed as a plain object
 }) {
-  const { restaurantId } = await params;
-  console.log("restaurantId from", restaurantId);
-  await dbConnect();
-  const restaurant = (await Restaurant.findById(restaurantId)
-    .populate({
-      path: "foods",
-      populate: {
-        path: "category",
-      },
-    })
-    .lean()) as RawRestaurant;
+  let restaurant: RawRestaurant = {
+    _id: new mongoose.Types.ObjectId(),
+    name: "",
+    description: "",
+    address: "",
+    phone: "",
+    image: "",
+    foods: [],
+    __v: 0,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
 
+  try {
+    const { restaurantId } = await params;
+    console.log("restaurantId from", restaurantId);
+    await dbConnect();
+    restaurant = (await Restaurant.findById(restaurantId)
+      .populate({
+        path: "foods",
+        populate: {
+          path: "category",
+        },
+      })
+      .lean()) as RawRestaurant;
+  } catch (error: Error | unknown) {
+    console.error("Error while fetching restuarant in details page", error);
+  }
   console.log("restaurant from [restaurantId] page is", restaurant);
 
   const serializedRestaurant: RestaurantType = {
