@@ -106,6 +106,7 @@
 //   );
 // }
 // import { Document, Types } from "mongoose";
+import dbConnect from "@/lib/dbConnect";
 import Food from "../../../app/models/food";
 import HomeFoodCard from "../../../components/HomeFoodCard";
 import { IFood } from "../../../stores/cartStore";
@@ -150,7 +151,7 @@ export default async function Category({
   params: Promise<{ categoryId: string }>;
 }) {
   const { categoryId } = await params;
-
+  await dbConnect();
   // Fetch foods and populate the category field
   const foods = await Food.find({ category: categoryId })
     .populate("category")

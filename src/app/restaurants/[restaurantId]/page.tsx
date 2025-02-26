@@ -7,41 +7,6 @@ import Image from "next/image";
 import mongoose from "mongoose";
 import { IFood } from "@/stores/cartStore";
 import { RawFood } from "@/components/HomeFoods";
-// export interface CategoryType {
-//   _id: string;
-//   name: string;
-// }
-
-// export interface FoodType {
-//   _id: string;
-//   name: string;
-//   category: CategoryType | string;
-//   price: number; // Ensure this property exists
-//   restaurant: string; // Ensure this matches the expected type
-//   isAvailable: boolean; // Ensure this is included
-// }
-
-// export interface RestaurantType {
-//   _id: string;
-//   name: string;
-//   foods: FoodType[];
-// }
-// export interface CategoryType {
-//   _id: string; // Change from string to ObjectId
-//   name: string;
-//   description: string;
-// }
-
-// export interface FoodType {
-//   _id: string;
-//   name: string;
-//   description: string;
-//   price: number;
-//   image?: string;
-//   category: mongoose.Schema.Types.ObjectId;
-//   restaurant: mongoose.Schema.Types.ObjectId;
-//   isAvailable: boolean;
-// }
 
 export interface RestaurantType {
   _id: string;
