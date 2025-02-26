@@ -54,6 +54,7 @@ export default async function RestaurantDetailPage({
     restaurant = (await Restaurant.findById(restaurantId)
       .populate({
         path: "foods",
+        model: "Food",
         populate: {
           path: "category",
         },
@@ -77,8 +78,8 @@ export default async function RestaurantDetailPage({
       restaurant: food.restaurant.toString(),
       isAvailable: food.isAvailable,
     })),
-    createdAt: restaurant.createdAt.toISOString(), // Convert Date to string
-    updatedAt: restaurant.updatedAt.toISOString(), // Convert Date to string
+    createdAt: restaurant.createdAt?.toISOString() || "", // Convert Date to string
+    updatedAt: restaurant.updatedAt?.toISOString() || "", // Convert Date to string
   };
   // Handle missing or empty foods array
   if (
