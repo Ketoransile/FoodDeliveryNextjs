@@ -73,7 +73,11 @@ export default async function RestaurantDetailPage({
       description: food.description,
       price: food.price,
       image: food.image || "/burger.svg",
-      category: food.category.toString(),
+      category: {
+        _id: food.category._id.toString(),
+        name: food.category.name,
+      },
+      categoryId: food.category._id.toString(),
       restaurant: food.restaurant.toString(),
       isAvailable: food.isAvailable,
     })),

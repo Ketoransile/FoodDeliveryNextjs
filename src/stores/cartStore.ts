@@ -5,20 +5,32 @@ import mongoose from "mongoose";
 
 // IFood interface
 export interface IFood {
+  // _id: string;
+  // name: string;
+  // description: string;
+  // price: number;
+  // image?: string;
+  // category: mongoose.Schema.Types.ObjectId | string;
+  // restaurant: mongoose.Schema.Types.ObjectId | string;
+  // isAvailable: boolean;
   _id: string;
   name: string;
   description: string;
   price: number;
   image?: string;
-  category: mongoose.Schema.Types.ObjectId | string;
+  category: { _id: string; name: string }; // For display purposes
+  categoryId: string; // For storage in the cart
   restaurant: mongoose.Schema.Types.ObjectId | string;
   isAvailable: boolean;
 }
 
 // Updated CartItem interface
 interface CartItem extends Omit<IFood, "category" | "restaurant"> {
+  // quantity: number;
+  // category: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
+  // restaurant: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
   quantity: number;
-  category: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
+  categoryId: string; // Store as string instead of ObjectId
   restaurant: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
 }
 
@@ -44,11 +56,6 @@ export const useCartStore = create<CartState>()(
 
       addToCart: (item) => {
         const { cart } = get();
-        // const { userId, cart } = get();
-        // if (!userId) {
-        // console.error("You must be logged in to add items to the cart.");
-        // return;
-        // }
 
         const existingItem = cart.find((i) => i._id === item._id);
         if (existingItem) {
@@ -64,7 +71,8 @@ export const useCartStore = create<CartState>()(
               {
                 ...item,
                 quantity: 1,
-                category: item.category,
+                // category: item.category,
+                categoryId: item.categoryId,
                 restaurant: item.restaurant,
               },
             ],

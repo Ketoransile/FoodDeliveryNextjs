@@ -3,17 +3,6 @@ import { IFood } from "../stores/cartStore";
 import Food from "../app/models/food";
 import mongoose from "mongoose";
 import dbConnect from "@/lib/dbConnect";
-// export interface IFood {
-//   _id: string;
-//   name: string;
-//   description?: string;
-//   price: number;
-//   image?: string;
-//   category: mongoose.Schema.Types.ObjectId;
-//   restaurant: mongoose.Schema.Types.ObjectId;
-//   isAvailable: boolean;
-// }
-// import { Document } from "mongoose";
 
 // Define the Mongoose document type
 export type RawFood = {
@@ -22,7 +11,15 @@ export type RawFood = {
   description: string;
   price: number;
   image?: string;
-  category: mongoose.Schema.Types.ObjectId;
+  // category: mongoose.Schema.Types.ObjectId;
+  category: {
+    _id: string;
+    name: string;
+    description: string;
+    createdAt: string; // or Date if you convert it
+    updatedAt: string; // or Date if you convert it
+    __v: number;
+  };
   restaurant: mongoose.Schema.Types.ObjectId;
   isAvailable: boolean;
   createdAt: string | Date;
@@ -33,29 +30,23 @@ async function getFoods(): Promise<IFood[]> {
   let foods: IFood[] = [];
   try {
     await dbConnect();
-    const rawFoods = (await Food.find().lean().exec()) as RawFood[];
+    const rawFoods = (await Food.find()
+      .populate("category")
+      .lean()
+      .exec()) as RawFood[];
     foods = rawFoods.map((food: RawFood) => ({
       _id: food._id.toString(), // Convert _id to string
       name: food.name,
       description: food.description,
       price: food.price,
       image: food.image, // Optional field, can be undefined
-      category: food.category.toString(), // This will be an ObjectId (MongoDB reference)
+      // category: food.category.toString(), // This will be an ObjectId (MongoDB reference)
+      category: { _id: food.category._id.toString(), name: food.category.name },
+      categoryId: food.category._id.toString(), // For storage in the cart
       restaurant: food.restaurant.toString(), // This will be an ObjectId (MongoDB reference)
       isAvailable: food.isAvailable,
     }));
-    // foods = foods as IFood[];
-    // .cache({ next: { revalidate: 60 } });
-    // const apiUrl = process.env.PUBLIC_API_URL || "http://localhost:3000";
-    // const response = await fetch(`${apiUrl}/api/foods`, {
-    //   next: { revalidate: 60 },
-    // });
 
-    // if (!response.ok) {
-    //   throw new Error("Error while fetching foods");
-    // }
-    // console.log(response);
-    // foods = await response.json();
     console.log("foods from homefoods are", foods);
   } catch (error) {
     console.error(error);

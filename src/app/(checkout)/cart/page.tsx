@@ -4,7 +4,6 @@ import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-// import { IFood } from "../../../stores/cartStore";
 export default function CartPage() {
   const { user } = useUser();
   const { cart, setUserId, addToCart, decreaseQuantity } = useCartStore();

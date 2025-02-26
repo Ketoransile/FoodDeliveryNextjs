@@ -13,7 +13,7 @@ export default async function Category({
   await dbConnect();
   // Fetch foods and populate the category field
   const foods = (await Food.find({ category: categoryId })
-    // .populate("category")
+    .populate("category")
     // .populate("restaurant")
     .lean()
     .exec()) as RawFood[]; // Explicitly defining the type
@@ -25,7 +25,9 @@ export default async function Category({
     description: food.description,
     price: food.price,
     image: food.image, // Optional field, can be undefined
-    category: food.category.toString(), // This will be an ObjectId (MongoDB reference)
+    // category: food.category.toString(), // This will be an ObjectId (MongoDB reference)
+    category: { _id: food.category._id.toString(), name: food.category.name },
+    categoryId: food.category._id.toString(), // For storage in the cart
     restaurant: food.restaurant.toString(), // This will be an ObjectId (MongoDB reference)
     isAvailable: food.isAvailable,
   }));
@@ -34,7 +36,7 @@ export default async function Category({
   return (
     <div className="flex flex-col gap-8 pt-12">
       <h1 className="font-bold text-2xl text-white">
-        {/* {serializedFoods[0]?.category?.name || ""} */}
+        {serializedFoods[0]?.category?.name || ""}
       </h1>
       <div className="grid grid-cols-4 gap-8">
         {serializedFoods.map((food) => (
