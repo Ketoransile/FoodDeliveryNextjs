@@ -24,7 +24,7 @@ export default function HomeFoodCard({ food }: { food: IFood }) {
   return (
     <div className="flex flex-col gap-2 backdrop-blur-2xl bg-white/10 border border-slate-400 rounded-xl">
       <Image
-        src={`${food.image}`}
+        src={food.image || "/burger.svg"}
         alt={food.name}
         width={200}
         height={200}

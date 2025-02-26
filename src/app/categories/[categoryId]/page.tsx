@@ -13,21 +13,21 @@ export default async function Category({
   await dbConnect();
   // Fetch foods and populate the category field
   const foods = (await Food.find({ category: categoryId })
-    .populate("category")
-    .populate("restaurant")
+    // .populate("category")
+    // .populate("restaurant")
     .lean()
     .exec()) as RawFood[]; // Explicitly defining the type
 
   console.log("foods from", foods);
   const serializedFoods: IFood[] = foods.map((food) => ({
-    _id: food._id.toString(), // Convert ObjectId to string
-    name: food.name || "",
-    description: food.description || "",
-    price: food.price || 0,
-    image: food.image || "/burger.svg",
-    category: food.category.toString(),
-    restaurant: food.restaurant.toString(), // Convert restaurant ObjectId to string
-    isAvailable: food.isAvailable ?? true,
+    _id: food._id.toString(), // Convert _id to string
+    name: food.name,
+    description: food.description,
+    price: food.price,
+    image: food.image, // Optional field, can be undefined
+    category: food.category.toString(), // This will be an ObjectId (MongoDB reference)
+    restaurant: food.restaurant.toString(), // This will be an ObjectId (MongoDB reference)
+    isAvailable: food.isAvailable,
   }));
   console.log("serializedFoods from", serializedFoods);
 
