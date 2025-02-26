@@ -104,7 +104,7 @@ export default function Header() {
       {/* Mobile Navigation (visible on max-lg screens) */}
       <div className="lg:hidden">
         {/* Hamburger Menu Button */}
-        <div className="fixed top-4 left-4 z-50">
+        <div className="  pt-4 mb-2 pl-4 z-50 rounded-full">
           <button onClick={handleMenuClick} className="focus:outline-none">
             {showNav ? (
               <IoIosCloseCircle size={32} className="text-white" />
@@ -127,10 +127,13 @@ export default function Header() {
             showNav ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex flex-col items-start gap-6 p-6">
-            <Link href="/" onClick={handleMenuClick}>
-              <Image src={logo} alt="logo" width={30} height={30} />
-            </Link>
+          <div className="flex flex-col items-start gap-12 p-6">
+            <div className="flex  items-center gap-12">
+              <Link href="/" onClick={handleMenuClick}>
+                <Image src={logo} alt="logo" width={30} height={30} />
+              </Link>
+              <AuthButtons />
+            </div>
             <button onClick={handleMenuClick}>
               <ActiveLink href="/">Home</ActiveLink>
             </button>
@@ -143,7 +146,6 @@ export default function Header() {
             <Link href="/cart" onClick={handleMenuClick}>
               <Image src={cart} alt="cart-icon" width={30} height={30} />
             </Link>
-            <AuthButtons />
           </div>
         </div>
       </div>

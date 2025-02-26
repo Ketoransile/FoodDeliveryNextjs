@@ -16,7 +16,7 @@ export default function Hero() {
         </p>
         <Link
           href="/restaurants"
-          className="bg-buttonbg  rounded-xl w-fit text-sm p-4 max-md:mx-24 "
+          className="bg-buttonbg  rounded-xl w-fit text-sm p-4 max-md:mx-32 "
         >
           Order Now
         </Link>

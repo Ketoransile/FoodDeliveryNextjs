@@ -129,8 +129,8 @@ export default async function RestaurantDetailsTabs({
   );
 
   return (
-    <Tabs defaultValue="recommended" className="w-full">
-      <TabsList className="flex justify-start gap-8 bg-transparent p-0">
+    <Tabs defaultValue="recommended" className="w-full ">
+      <TabsList className="flex justify-start gap-8 bg-transparent p-0 max-lg:grid  max-md:grid-cols-2 md:grid-cols-3 h-auto">
         <TabsTrigger value="recommended">Recommended</TabsTrigger>
 
         {/* Display all categories, even if they have no foods */}

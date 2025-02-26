@@ -101,7 +101,7 @@ export default async function RestaurantDetailPage({
   return (
     <div className="flex flex-col gap-8 pt-12">
       <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 max-md:grid-cols-2">
           {serializedRestaurant.foods.map((food: IFood, index: number) => (
             <Image
               key={food.name}
@@ -111,7 +111,7 @@ export default async function RestaurantDetailPage({
               alt={food.name}
               className={`object-cover rounded-xl ${
                 index === 0
-                  ? "row-span-2 col-span-2 w-full max-h-[400px] min-h-[400px]"
+                  ? "md:row-span-2  md:col-span-2 w-full md:max-h-[400px] md:min-h-[400px]  "
                   : "w-[250px] h-[200px]"
               }`}
             />
