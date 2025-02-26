@@ -246,7 +246,11 @@ export default function PaymentPage() {
               <FormItem>
                 <FormLabel>Cardholder Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Name" {...field} className="w-1/2" />
+                  <Input
+                    placeholder="Name"
+                    {...field}
+                    className="w-1/2 max-lg:w-full"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -262,14 +266,14 @@ export default function PaymentPage() {
                   <Input
                     placeholder="card number"
                     {...field}
-                    className="w-1/2"
+                    className="w-1/2 max-lg:w-full"
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <div className="flex gap-10">
+          <div className="flex gap-10 max-md:grid max-md:grid-cols-1">
             <FormField
               control={form.control}
               name="expiryMonth"

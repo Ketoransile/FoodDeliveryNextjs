@@ -74,7 +74,7 @@ export default async function RestaurantsPage() {
       {restaurants.length === 0 ? (
         <p>No restaurants found.</p>
       ) : (
-        <div className="grid grid-cols-4 gap-8">
+        <div className="grid grid-cols-4 gap-8 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
           {restaurants.map((restaurant) => (
             <HomeRestaurantCard key={restaurant._id} restaurant={restaurant} />
           ))}

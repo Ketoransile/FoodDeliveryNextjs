@@ -56,7 +56,7 @@ async function getFoods(): Promise<IFood[]> {
 export default async function HomeFoods() {
   const foods: IFood[] = await getFoods();
   return (
-    <div className="grid grid-cols-5 gap-8 pb-48">
+    <div className="grid grid-cols-5 gap-8 pb-48 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
       {foods.slice(0, 10).map((food) => (
         <HomeFoodCard key={food._id.toString()} food={food} />
       ))}

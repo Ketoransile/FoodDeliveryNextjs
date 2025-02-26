@@ -50,7 +50,7 @@ export default function AddressPage() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 backdrop-blur-lg bg-gradient-to-br from-white/10 to-transparent p-6 border border-slate-700 rounded-xl"
       >
-        <div className="grid grid-cols-2 gap-x-32 gap-y-4">
+        <div className="grid grid-cols-2 gap-x-32 gap-y-4 max-md:grid-cols-1">
           {/* Name Field */}
           <FormField
             control={form.control}

@@ -34,7 +34,7 @@ export default function OrderHistoryCard({
         src={`${item?.food?.image}`}
         width={200}
         height={200}
-        className="h-[200px] w-[200px] rounded-xl object-cover"
+        className="h-[200px] w-[200px] rounded-xl object-cover max-md:h-[150px] max-md:w-[150px]"
         alt="food image"
       />
       <div className="flex flex-col gap-2 rounded-xl">

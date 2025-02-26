@@ -54,7 +54,7 @@ export function YearSelector({ value, onChange }: YearSelectorProps) {
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[180px] max-lg:w-full">
         <SelectValue placeholder="Select a Year" />
       </SelectTrigger>
       <SelectContent>

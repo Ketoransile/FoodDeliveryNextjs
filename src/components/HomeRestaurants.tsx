@@ -82,20 +82,22 @@ export default async function HomeRestaurants() {
   console.log("Restaurants from db", Restaurants);
   return (
     <div className="flex flex-col gap-8 pb-48">
-      <div className="flex  gap-8 justify-between ">
-        <h1 className="text-white font-bold text-xl">Restaurants Near You</h1>
+      <div className="flex  gap-8 justify-between items-center ">
+        <h1 className="text-white font-bold text-xl max-lg:text-lg">
+          Restaurants Near You
+        </h1>
         <Link
           href="/restaurants"
           className="bg-buttonbg p-4  rounded-full w-fit text-sm "
         >
-          Browse all Restaurants
+          All Restaurants
         </Link>
       </div>
       <div className="pt-12">
         {restaurants.length === 0 ? (
           <p>No restaurants found.</p>
         ) : (
-          <div className="px-20 ">
+          <div className="px-20 max-lg:px-12 ">
             <Carousel
               opts={{
                 align: "start",

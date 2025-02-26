@@ -55,7 +55,7 @@ interface MonthSelectorProps {
 export function MonthSelector({ value, onChange }: MonthSelectorProps) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[180px] max-lg:w-full">
         <SelectValue placeholder="Select a Month" />
       </SelectTrigger>
       <SelectContent>

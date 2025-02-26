@@ -23,10 +23,13 @@ export default function CartPage() {
       <h1 className="text-base pb-4 ">
         You have {cart.length} items in your cart
       </h1>
-      <div className="flex flex-col gap-4 py-4 px-6 backdrop-blur-lg bg-gradient-to-br from-white/20  to-transparent border border-slate-700 rounded-xl overflow-y-auto max-h-[440px]">
+      <div className="flex flex-col gap-4 py-4 px-6 backdrop-blur-lg bg-gradient-to-br from-white/20  to-transparent border border-slate-700 rounded-xl overflow-y-auto max-h-[440px] max-sm:gap-12  ">
         {cart.map((food) => (
-          <div key={food._id} className="flex justify-between items-center ">
-            <div className="flex gap-8 justify-center items-center">
+          <div
+            key={food._id}
+            className="flex justify-between items-center max-sm:grid max-sm:grid-cols-2 max-sm:items-center max-sm:justify-start border border-slate-700 rounded-xl "
+          >
+            <div className="flex gap-8 justify-center items-center col-span-2 max-sm:grid max-sm:grid-cols-1 p-4">
               <Image
                 src={food.image || "/burger.svg"}
                 alt={food.name}
@@ -34,7 +37,7 @@ export default function CartPage() {
                 height={200}
                 className="object-cover rounded-xl w-32 h-32 "
               />
-              <h1 className="text-lg font-bold max-w-56 min-w-56">
+              <h1 className="text-lg font-bold max-w-56 min-w-56 max-lg:w-fit-content">
                 {food.name}
               </h1>
             </div>

@@ -38,7 +38,7 @@ export default async function Category({
       <h1 className="font-bold text-2xl text-white">
         {serializedFoods[0]?.category?.name || ""}
       </h1>
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-4 gap-8 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
         {serializedFoods.map((food) => (
           <HomeFoodCard key={food._id} food={food} />
         ))}

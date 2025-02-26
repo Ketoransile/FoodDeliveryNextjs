@@ -98,7 +98,7 @@ export default async function HomeTestimonials() {
         alt="eclipse-image"
         width={300}
         height={300}
-        className="absolute top-0 right-80"
+        className="absolute top-0 right-80 max-lg:hidden"
         priority
       />
       <Image
@@ -106,7 +106,7 @@ export default async function HomeTestimonials() {
         alt="eclipse-image"
         width={200}
         height={200}
-        className="absolute top-80 left-96 overflow-visible"
+        className="absolute top-80 left-96 overflow-visible max-lg:hidden"
         priority
       />
 
@@ -118,7 +118,7 @@ export default async function HomeTestimonials() {
         {customersReviews.length === 0 ? (
           <p>No restaurants found.</p>
         ) : (
-          <div className="px-20 ">
+          <div className="px-20 max-lg:px-12">
             <Carousel
               opts={{
                 align: "start",

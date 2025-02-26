@@ -38,7 +38,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} ${openSans.variable} antialiased bg-mainbg text-white `}
         >
           <Header />
-          <div className="pt-4 px-20">{children}</div>
+          <div className="pt-4 px-20 max-lg:px-6">{children}</div>
           <Toaster />
           <Footer />
         </body>

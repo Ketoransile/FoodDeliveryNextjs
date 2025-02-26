@@ -8,11 +8,11 @@ import { Input } from "./ui/input";
 export default function Footer() {
   return (
     <div
-      className="grid grid-cols-4  px-20 pt-20 pb-12 mt-32 backdrop-blur-lg bg-white/10 text-slate-300"
+      className="grid grid-cols-4 gap-y-12 px-20 pt-20 pb-12 mt-32 backdrop-blur-lg bg-white/10 text-slate-300 max-lg:grid-cols-2 max-lg:gap-x-20"
       id="footer"
     >
-      <div className="flex flex-col gap-8">
-        <div className="flex gap-4">
+      <div className="flex flex-col gap-8 ">
+        <div className="flex gap-4 max-lg:grid max-lg:grid-cols-2 max-lg:gap-x-2">
           <Link href="#">
             <FaInstagram />
           </Link>

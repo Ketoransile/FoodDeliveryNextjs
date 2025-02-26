@@ -10,14 +10,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-visible overflow-x-hidden">
       {/* Background Eclipses */}
       <Image
         src="/biggerEclipse.svg"
         alt="Background"
-        width={500}
-        height={500}
-        className="absolute -z-10 -top-20 -right-20"
+        width={400}
+        height={400}
+        className="absolute -z-10 -top-60 -right-60  "
         loading="lazy"
       />
       <Image
@@ -25,7 +25,7 @@ export default function Home() {
         alt="Background"
         width={300}
         height={300}
-        className="absolute -z-10 top-[300px] right-[350px]"
+        className="absolute -z-10 top-[300px] right-[350px] max-lg:-left-60 "
         priority
       />
 

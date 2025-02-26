@@ -72,7 +72,7 @@ export default async function HomeCategories() {
             />
             <h1 className="font-bold text-xs text-white">Recommended</h1>
           </div>
-          <div className="flex justify-between items-center gap-4 p-4">
+          <div className="flex justify-between items-center gap-4 p-4 max-lg:grid max-lg:grid-cols-4 max-lg:justify-start max-lg:items-center">
             {categories.map((category) => (
               <Link
                 href={`/categories/${category._id}`}
