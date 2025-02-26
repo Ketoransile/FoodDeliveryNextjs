@@ -25,7 +25,8 @@ export interface IFood {
 }
 
 // Updated CartItem interface
-interface CartItem extends Omit<IFood, "category" | "restaurant"> {
+// interface CartItem extends Omit<IFood, "category" | "restaurant"> {
+interface CartItem extends Omit<IFood, "categoryId" | "restaurant"> {
   // quantity: number;
   // category: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
   // restaurant: mongoose.Schema.Types.ObjectId | string; // Store as string instead of ObjectId
