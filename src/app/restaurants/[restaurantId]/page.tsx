@@ -54,7 +54,6 @@ export default async function RestaurantDetailPage({
     restaurant = (await Restaurant.findById(restaurantId)
       .populate({
         path: "foods",
-        model: "Food",
         populate: {
           path: "category",
         },
@@ -78,10 +77,11 @@ export default async function RestaurantDetailPage({
       restaurant: food.restaurant.toString(),
       isAvailable: food.isAvailable,
     })),
-    createdAt: restaurant.createdAt?.toISOString() || "", // Convert Date to string
-    updatedAt: restaurant.updatedAt?.toISOString() || "", // Convert Date to string
+    createdAt: restaurant.createdAt.toISOString(), // Convert Date to string
+    updatedAt: restaurant.updatedAt.toISOString(), // Convert Date to string
   };
   // Handle missing or empty foods array
+  console.log("serialized restaurant is ", serializedRestaurant);
   if (
     !serializedRestaurant ||
     !serializedRestaurant.foods ||
@@ -115,7 +115,7 @@ export default async function RestaurantDetailPage({
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col gap-4">
-            <h1>{serializedRestaurant.name}s</h1>
+            <h1>{serializedRestaurant.name}</h1>
             <p className="text-slate-400">Burger, FastFood, Beverages</p>
             <p className="text-slate-400"> Austin, Texas</p>
             <div className="flex gap-4">
