@@ -154,7 +154,7 @@ export default async function RestaurantDetailsTabs({
             .map((food) => (
               <Card
                 key={String(food._id)}
-                className="bg-gradient-to-br backdrop-blur-3xl from-white/30 to-transparent border border-slate-700"
+                className="bg-gradient-to-br backdrop-blur-3xl from-white/30 to-transparent border border-slate-700 mt-6"
               >
                 <RestaurantDetailCard
                   food={{
@@ -174,7 +174,7 @@ export default async function RestaurantDetailsTabs({
         {restaurant.foods.map((food) => (
           <Card
             key={String(food._id)}
-            className="bg-gradient-to-br backdrop-blur-3xl from-white/30 to-transparent border border-slate-700 gap-4"
+            className="bg-gradient-to-br backdrop-blur-3xl from-white/30 to-transparent border border-slate-700 gap-4 mt-6"
           >
             <RestaurantDetailCard
               food={{
