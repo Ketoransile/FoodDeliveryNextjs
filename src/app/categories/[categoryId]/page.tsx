@@ -106,9 +106,9 @@
 //   );
 // }
 // import { Document, Types } from "mongoose";
-import Food from "@/app/models/food";
-import HomeFoodCard from "@/components/HomeFoodCard";
-import { IFood } from "@/stores/cartStore";
+import Food from "../../../app/models/food";
+import HomeFoodCard from "../../../components/HomeFoodCard";
+import { IFood } from "../../../stores/cartStore";
 // export interface IFood {
 //   _id: string;
 //   name: string;
@@ -176,7 +176,16 @@ export default async function Category({
   //   restaurant: food.restaurant.toString(), // Convert restaurant ObjectId to string
   //   isAvailable: food.isAvailable ?? true,
   // }));
-
+  const serializedFoods: IFood[] = foods.map((food) => ({
+    _id: food._id.toString(), // Convert ObjectId to string
+    name: food.name || "",
+    description: food.description || "",
+    price: food.price || 0,
+    image: food.image || "/burger.svg",
+    category: food.category,
+    restaurant: food.restaurant, // Convert restaurant ObjectId to string
+    isAvailable: food.isAvailable ?? true,
+  }));
   console.log("serializedFoods from", foods);
 
   return (
@@ -185,7 +194,7 @@ export default async function Category({
         {/* {foods[0]?.category?.name || ""} */}
       </h1>
       <div className="grid grid-cols-4 gap-8">
-        {foods.map((food) => (
+        {serializedFoods.map((food) => (
           <HomeFoodCard key={food._id} food={food} />
         ))}
       </div>

@@ -175,7 +175,7 @@ async function dbConnect() {
     console.log("Establishing new database connection...");
     cached.promise = mongoose
       .connect(MONGODB_URI, {
-        useNewUrlParser: true,
+        // useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 30000, // 30 seconds to prevent timeouts
         socketTimeoutMS: 60000, // 45s socket timeout
