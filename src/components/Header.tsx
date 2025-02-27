@@ -82,7 +82,7 @@ export default function Header() {
   return (
     <>
       {/* Desktop Navigation (hidden on max-lg screens) */}
-      <div className="justify-between flex items-center backdrop-blur-3xl bg-white/10 border-b border-b-slate-400 pt-4 pb-4 px-20 max-lg:hidden">
+      <div className="sticky top-0  pb-4 w-full z-50 justify-between flex items-center backdrop-blur-3xl bg-white/10 border-b border-b-slate-400 pt-4 px-20 max-lg:hidden">
         <Link href="/">
           <Image src={logo} alt="logo" width={30} height={30} />
         </Link>
